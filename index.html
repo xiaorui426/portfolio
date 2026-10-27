@@ -22,8 +22,9 @@
       .brand { display:flex; align-items:center; gap:10px; color:white; font-weight:800; }
       .avatar { width:36px; height:36px; border:1px solid rgba(255,255,255,.48); border-radius:50%; object-fit:cover; object-position:center 18%; }
       .nav-actions { display:flex; align-items:center; gap:4px; }
-      .nav-actions a { padding:10px 13px; border-radius:11px; font-weight:700; transition:background .2s ease,color .2s ease; }
-      .nav-actions a:hover { background:rgba(143,207,255,.18); color:white; }
+      .nav-actions a, .nav-actions button { padding:10px 13px; border:0; border-radius:11px; background:transparent; color:inherit; font:inherit; font-weight:700; cursor:pointer; transition:background .2s ease,color .2s ease; }
+      .nav-actions a:hover, .nav-actions button:hover { background:rgba(143,207,255,.18); color:white; }
+      .nav-actions button:disabled { cursor:wait; opacity:.72; }
       .intro { max-width:760px; padding-top:150px; }
       .eyebrow { color:#dceaff; font-size:14px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
       h1 { margin:16px 0; max-width:700px; font-size:clamp(48px,9vw,120px); line-height:.91; letter-spacing:-.075em; }
@@ -48,7 +49,7 @@
     <header class="hero" id="top">
       <nav class="nav" aria-label="主导航">
         <a class="brand" href="#top"><img class="avatar" src="assets/profile/sun-xiaorui.jpg" alt="孙肖瑞头像" /><span>孙肖瑞</span></a>
-        <div class="nav-actions"><a href="assets/downloads/sun-xiaorui-uiux-portfolio.pdf" download>下载作品集</a><a href="assets/downloads/sun-xiaorui-uiux-resume.pdf" download>下载简历</a></div>
+        <div class="nav-actions"><button id="download-portfolio" type="button">下载作品集</button><a href="assets/downloads/sun-xiaorui-uiux-resume.pdf" download>下载简历</a></div>
       </nav>
       <div class="intro">
         <div class="eyebrow">Design Portfolio / 2026</div>
@@ -75,6 +76,30 @@
         const image = document.createElement('img'); image.loading = 'lazy'; image.dataset.src = `assets/pages/page-${number}.jpg`; image.alt = `孙肖瑞 UI/UX 设计作品集，第 ${page} 页`;
         article.append(image); gallery.append(article); observer.observe(image);
       }
+      const portfolioDownload = document.getElementById('download-portfolio');
+      portfolioDownload.addEventListener('click', async () => {
+        const originalLabel = portfolioDownload.textContent;
+        portfolioDownload.disabled = true;
+        portfolioDownload.textContent = '正在准备…';
+        try {
+          const parts = Array.from({ length: 24 }, (_, index) => `assets/downloads/portfolio-parts/part-aa${String.fromCharCode(97 + index)}`);
+          const buffers = await Promise.all(parts.map(path => fetch(path).then(response => {
+            if (!response.ok) throw new Error(`Unable to fetch ${path}`);
+            return response.arrayBuffer();
+          })));
+          const file = new Blob(buffers, { type: 'application/pdf' });
+          const link = document.createElement('a');
+          link.href = URL.createObjectURL(file);
+          link.download = '孙肖瑞UI·UX作品集.pdf';
+          link.click();
+          setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+        } catch (error) {
+          portfolioDownload.textContent = '下载失败，请重试';
+          setTimeout(() => { portfolioDownload.textContent = originalLabel; }, 1800);
+        } finally {
+          portfolioDownload.disabled = false;
+        }
+      });
     </script>
   </body>
 </html>
