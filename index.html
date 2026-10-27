@@ -18,8 +18,12 @@
       .hero { min-height:100svh; position:relative; isolation:isolate; display:grid; align-items:end; overflow:hidden; padding:clamp(24px,5vw,76px); }
       .hero::before { content:""; position:absolute; inset:0; z-index:-2; background:linear-gradient(90deg,rgba(2,8,15,.94) 0%,rgba(2,8,15,.58) 39%,rgba(2,8,15,.08) 72%),linear-gradient(0deg,rgba(2,8,15,.74),transparent 58%),url("assets/hero-background.jpg") center / cover no-repeat; }
       .hero::after { content:""; position:absolute; z-index:-1; inset:auto -10% -34% 33%; height:48%; background:radial-gradient(ellipse,rgba(61,142,255,.27),transparent 67%); filter:blur(20px); }
-      .nav { position:absolute; inset:28px clamp(24px,5vw,76px) auto; display:flex; justify-content:space-between; align-items:center; color:var(--muted); font-size:14px; letter-spacing:.08em; }
-      .brand { color:white; font-weight:800; }
+      .nav { position:fixed; z-index:10; top:18px; left:clamp(16px,4vw,56px); right:clamp(16px,4vw,56px); display:flex; justify-content:space-between; align-items:center; gap:18px; min-height:58px; padding:8px 10px 8px 12px; border:1px solid rgba(234,242,255,.2); border-radius:18px; background:rgba(4,12,21,.58); box-shadow:0 12px 32px rgba(0,0,0,.2); backdrop-filter:blur(14px); color:var(--muted); font-size:14px; letter-spacing:.03em; }
+      .brand { display:flex; align-items:center; gap:10px; color:white; font-weight:800; }
+      .avatar { width:36px; height:36px; border:1px solid rgba(255,255,255,.48); border-radius:50%; object-fit:cover; object-position:center 18%; }
+      .nav-actions { display:flex; align-items:center; gap:4px; }
+      .nav-actions a { padding:10px 13px; border-radius:11px; font-weight:700; transition:background .2s ease,color .2s ease; }
+      .nav-actions a:hover { background:rgba(143,207,255,.18); color:white; }
       .intro { max-width:760px; padding-top:150px; }
       .eyebrow { color:#dceaff; font-size:14px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
       h1 { margin:16px 0; max-width:700px; font-size:clamp(48px,9vw,120px); line-height:.91; letter-spacing:-.075em; }
@@ -36,13 +40,16 @@
       .page img { display:block; width:100%; height:auto; aspect-ratio:auto; object-fit:contain; opacity:0; transform:translateY(12px); transition:opacity .45s ease,transform .45s ease; }
       .page img.ready { opacity:1; transform:none; }
       footer { border-top:1px solid var(--line); padding:26px clamp(20px,5vw,76px); display:flex; justify-content:space-between; gap:16px; color:var(--muted); font-size:13px; }
-      @media (max-width:640px) { .hero { min-height:730px; padding:24px; } .hero::before { background-position:58% center; } .nav { inset:20px 24px auto; } .intro { padding-top:110px; } .section-head { display:block; } .section-head p { margin-top:12px; } .page { border-radius:10px; } .gallery { gap:12px; } footer { display:block; } footer p + p { margin-top:10px; } }
+      @media (max-width:640px) { .hero { min-height:730px; padding:24px; } .hero::before { background-position:58% center; } .nav { top:10px; left:10px; right:10px; min-height:52px; padding:6px 7px; border-radius:14px; } .avatar { width:32px; height:32px; } .nav-actions { gap:0; } .nav-actions a { padding:9px 8px; font-size:12px; } .intro { padding-top:110px; } .section-head { display:block; } .section-head p { margin-top:12px; } .page { border-radius:10px; } .gallery { gap:12px; } footer { display:block; } footer p + p { margin-top:10px; } }
       @media (prefers-reduced-motion:reduce) { *,html { scroll-behavior:auto!important; transition:none!important; } }
     </style>
   </head>
   <body>
     <header class="hero" id="top">
-      <nav class="nav" aria-label="主导航"><a class="brand" href="#top">SUN XIAORUI</a><span>UI/UX DESIGNER · 2026</span></nav>
+      <nav class="nav" aria-label="主导航">
+        <a class="brand" href="#top"><img class="avatar" src="assets/profile/sun-xiaorui.jpg" alt="孙肖瑞头像" /><span>孙肖瑞</span></a>
+        <div class="nav-actions"><a href="assets/downloads/sun-xiaorui-uiux-portfolio.pdf" download>下载作品集</a><a href="assets/downloads/sun-xiaorui-uiux-resume.pdf" download>下载简历</a></div>
+      </nav>
       <div class="intro">
         <div class="eyebrow">Design Portfolio / 2026</div>
         <h1>UI/UX<br />设计作品集</h1>
