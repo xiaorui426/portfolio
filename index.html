@@ -36,12 +36,13 @@
       .section-head { display:flex; align-items:end; justify-content:space-between; gap:24px; margin-bottom:28px; }
       h2 { margin:0; font-size:clamp(32px,5vw,64px); letter-spacing:-.06em; }
       .section-head p { max-width:340px; margin:0; color:var(--muted); line-height:1.6; }
-      .gallery { display:grid; gap:22px; }
-      .page { overflow:hidden; border:1px solid var(--line); border-radius:18px; background:#0b1724; box-shadow:0 22px 70px rgba(0,0,0,.28); }
-      .page img { display:block; width:100%; height:auto; aspect-ratio:auto; object-fit:contain; opacity:0; transform:translateY(12px); transition:opacity .45s ease,transform .45s ease; }
-      .page img.ready { opacity:1; transform:none; }
+      .pdf-viewer { overflow:hidden; border:1px solid var(--line); border-radius:18px; background:#0b1724; box-shadow:0 22px 70px rgba(0,0,0,.28); }
+      .viewer-bar { display:flex; justify-content:space-between; align-items:center; gap:16px; padding:13px 16px; background:#111e2e; color:var(--muted); font-size:13px; }
+      .viewer-status { margin:0; }
+      .viewer-bar button { padding:8px 11px; border:1px solid var(--line); border-radius:9px; background:transparent; color:var(--ink); font:inherit; cursor:pointer; }
+      .viewer-frame { display:block; width:100%; height:min(82vh,1000px); border:0; background:#fff; }
       footer { border-top:1px solid var(--line); padding:26px clamp(20px,5vw,76px); display:flex; justify-content:space-between; gap:16px; color:var(--muted); font-size:13px; }
-      @media (max-width:640px) { .hero { min-height:730px; padding:24px; } .hero::before { background-position:58% center; } .nav { top:10px; left:10px; right:10px; min-height:52px; padding:6px 7px; border-radius:14px; } .avatar { width:32px; height:32px; } .nav-actions { gap:0; } .nav-actions a { padding:9px 8px; font-size:12px; } .intro { padding-top:110px; } .section-head { display:block; } .section-head p { margin-top:12px; } .page { border-radius:10px; } .gallery { gap:12px; } footer { display:block; } footer p + p { margin-top:10px; } }
+      @media (max-width:640px) { .hero { min-height:730px; padding:24px; } .hero::before { background-position:58% center; } .nav { top:10px; left:10px; right:10px; min-height:52px; padding:6px 7px; border-radius:14px; } .avatar { width:32px; height:32px; } .nav-actions { gap:0; } .nav-actions a, .nav-actions button { padding:9px 8px; font-size:12px; } .intro { padding-top:110px; } .section-head { display:block; } .section-head p { margin-top:12px; } .pdf-viewer { border-radius:10px; } .viewer-frame { height:70vh; } footer { display:block; } footer p + p { margin-top:10px; } }
       @media (prefers-reduced-motion:reduce) { *,html { scroll-behavior:auto!important; transition:none!important; } }
     </style>
   </head>
@@ -60,46 +61,51 @@
       </div>
     </header>
     <main id="portfolio">
-      <div class="section-head"><div><div class="eyebrow">Selected work</div><h2>完整作品集</h2></div><p>共 44 页。每页均按原始比例显示，可完整浏览。</p></div>
-      <section class="gallery" id="gallery" aria-label="孙肖瑞 UI UX 设计作品集页面"></section>
+      <div class="section-head"><div><div class="eyebrow">Selected work</div><h2>完整作品集</h2></div><p>原始 PDF · 共 43 页。可在线阅读或下载。</p></div>
+      <section class="pdf-viewer" aria-label="孙肖瑞 UI UX 设计作品集 PDF">
+        <div class="viewer-bar"><p class="viewer-status" id="viewer-status">正在加载原始 PDF…</p><button id="viewer-download" type="button">下载 PDF</button></div>
+        <iframe class="viewer-frame" id="portfolio-frame" title="孙肖瑞 UI UX 设计作品集"></iframe>
+      </section>
     </main>
     <footer><p>© 2026 孙肖瑞 · UI/UX Design Portfolio</p><p>Built for job applications &amp; interviews</p></footer>
     <script>
-      const gallery = document.getElementById('gallery');
-      const observer = new IntersectionObserver(entries => entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        const image = entry.target; image.src = image.dataset.src; image.onload = () => image.classList.add('ready'); observer.unobserve(image);
-      }), { rootMargin:'900px 0px' });
-      for (let page = 1; page <= 44; page++) {
-        const number = String(page).padStart(2,'0');
-        const article = document.createElement('article'); article.className = 'page';
-        const image = document.createElement('img'); image.loading = 'lazy'; image.dataset.src = `assets/pages/page-${number}.jpg`; image.alt = `孙肖瑞 UI/UX 设计作品集，第 ${page} 页`;
-        article.append(image); gallery.append(article); observer.observe(image);
+      const portfolioParts = Array.from({ length: 23 }, (_, index) => `assets/downloads/portfolio-parts/part-aa${String.fromCharCode(97 + index)}`);
+      let portfolioUrl;
+      async function getPortfolioUrl() {
+        if (portfolioUrl) return portfolioUrl;
+        const buffers = await Promise.all(portfolioParts.map(path => fetch(path).then(response => {
+          if (!response.ok) throw new Error(`Unable to fetch ${path}`);
+          return response.arrayBuffer();
+        })));
+        portfolioUrl = URL.createObjectURL(new Blob(buffers, { type: 'application/pdf' }));
+        return portfolioUrl;
       }
-      const portfolioDownload = document.getElementById('download-portfolio');
-      portfolioDownload.addEventListener('click', async () => {
-        const originalLabel = portfolioDownload.textContent;
-        portfolioDownload.disabled = true;
-        portfolioDownload.textContent = '正在准备…';
+      async function downloadPortfolio(button) {
+        const originalLabel = button.textContent;
+        button.disabled = true;
+        button.textContent = '正在准备…';
         try {
-          const parts = Array.from({ length: 24 }, (_, index) => `assets/downloads/portfolio-parts/part-aa${String.fromCharCode(97 + index)}`);
-          const buffers = await Promise.all(parts.map(path => fetch(path).then(response => {
-            if (!response.ok) throw new Error(`Unable to fetch ${path}`);
-            return response.arrayBuffer();
-          })));
-          const file = new Blob(buffers, { type: 'application/pdf' });
           const link = document.createElement('a');
-          link.href = URL.createObjectURL(file);
+          link.href = await getPortfolioUrl();
           link.download = '孙肖瑞UI·UX作品集.pdf';
           link.click();
-          setTimeout(() => URL.revokeObjectURL(link.href), 1000);
         } catch (error) {
-          portfolioDownload.textContent = '下载失败，请重试';
-          setTimeout(() => { portfolioDownload.textContent = originalLabel; }, 1800);
+          button.textContent = '下载失败，请重试';
+          setTimeout(() => { button.textContent = originalLabel; }, 1800);
         } finally {
-          portfolioDownload.disabled = false;
+          button.disabled = false;
         }
-      });
+      }
+      const portfolioDownload = document.getElementById('download-portfolio');
+      const viewerDownload = document.getElementById('viewer-download');
+      portfolioDownload.addEventListener('click', () => downloadPortfolio(portfolioDownload));
+      viewerDownload.addEventListener('click', () => downloadPortfolio(viewerDownload));
+      const portfolioFrame = document.getElementById('portfolio-frame');
+      const viewerStatus = document.getElementById('viewer-status');
+      getPortfolioUrl().then(url => {
+        portfolioFrame.src = `${url}#view=FitH`;
+        portfolioFrame.addEventListener('load', () => { viewerStatus.textContent = '原始 PDF · 共 43 页'; }, { once:true });
+      }).catch(() => { viewerStatus.textContent = '加载失败，请点击右侧下载 PDF。'; });
     </script>
   </body>
 </html>
