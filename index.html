@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="孙肖瑞 · UI/UX 体验设计作品集" />
+    <title>孙肖瑞 · 体验设计</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .site-header{position:absolute;top:0;left:0;right:0;color:#fff;border-color:rgba(255,255,255,.38)}
+      .site-header .brand span{color:#b39cff}.site-header .nav-dot span{background:#9edb25}
+      .profile-brand{display:flex;align-items:center;gap:10px;color:inherit;text-decoration:none;font:700 .78rem "DM Mono",monospace;letter-spacing:.05em}
+      .profile-brand img{width:34px;height:34px;border:1px solid rgba(255,255,255,.7);border-radius:50%;object-fit:cover;object-position:center 22%}
+      .resume-button{display:inline-flex;align-items:center;gap:8px;padding:9px 13px;border:1px solid rgba(255,255,255,.72);border-radius:999px;color:inherit;text-decoration:none;font:600 .68rem "DM Mono",monospace;letter-spacing:.05em;transition:background .2s,color .2s}
+      .resume-button:hover{background:#fff;color:#151515}
+      .intro-band .marquee-track{display:flex;width:max-content;animation:marquee-loop 24s linear infinite}
+      .intro-band .marquee-track span{flex:none;padding-right:3rem}
+      @keyframes marquee-loop{to{transform:translateX(-50%)}}
+      .profile-introduction{width:100%;background:#050d14}
+      .profile-introduction img{display:block;width:100%;height:auto}
+      .closing-page{width:100%;background:#02080b}
+      .closing-page img{display:block;width:100%;height:auto}
+      .contact{padding-top:28px}
+      .contact-row{border-top:0}
+      body{background:#050505}
+      .work{background:#050505;color:#f5f4ef}
+      .work .eyebrow,.work .section-note{color:#aaa9a2}
+      .work .section-head h2{color:#f5f4ef}
+      .project-dialog{color:#151515}
+      .project-grid{grid-template-columns:1.08fr .85fr .85fr;grid-template-rows:repeat(2,minmax(320px,1fr));gap:14px}
+      .project-slot{min-height:0;border:1px dashed rgba(255,255,255,.3);border-radius:24px;background:linear-gradient(145deg,#161616,#0a0a0a);display:flex;align-items:center;justify-content:center;color:#bdbdb7;isolation:auto}
+      .project-slot span{font:600 .72rem "DM Mono",monospace;letter-spacing:.08em}.project-slot::after{content:"待上传图片";position:absolute;top:22px;left:22px;font:500 .6rem "DM Mono",monospace;letter-spacing:.08em;color:#74736c}
+      .slot-1{grid-column:1;grid-row:1}.slot-2{grid-column:1;grid-row:2}.slot-3{grid-column:2 / span 2;grid-row:1}.slot-4{grid-column:2;grid-row:2}.slot-5{grid-column:3;grid-row:2}
+      @media(max-width:720px){.project-grid{grid-template-columns:1fr;grid-template-rows:none}.project-slot{grid-column:auto;grid-row:auto;min-height:260px}}
+      .project-grid{display:grid;grid-template-columns:42.3fr 57.7fr;grid-template-rows:none;gap:14px;align-items:start}
+      .mosaic-column{display:flex;min-width:0;flex-direction:column;gap:14px}.mosaic-bottom{display:grid;grid-template-columns:1.26fr 1fr;gap:14px}
+      .project-slot{display:block;min-height:0;border:0;border-radius:0;background:transparent}.project-slot::after{content:none}.project-slot img{display:block;width:100%;height:auto}
+      .slot-1,.slot-2,.slot-3,.slot-4,.slot-5{grid-column:auto;grid-row:auto}
+      @media(max-width:720px){.project-grid{display:flex;flex-direction:column}.mosaic-column,.mosaic-bottom{width:100%;display:flex;flex-direction:column;gap:14px}}
+      .work{position:relative;width:100%;max-width:none;margin:0;padding:0;background:transparent}
+      .work .section-head{display:none}.work-background{display:block;width:100%;height:auto}.work>.project-grid{position:absolute;top:31.2%;left:4.8%;right:4.8%}
+      @media(max-width:720px){.work{width:100%}.work-background{width:100%;height:auto}.work>.project-grid{position:static;margin:0 18px -6px}}
+      .project-grid,.mosaic-column,.mosaic-bottom{gap:4px}.project-slot{position:relative;padding:0;overflow:visible;cursor:pointer;transition:transform .2s ease,filter .2s ease}.project-slot:hover,.project-slot:focus-visible{transform:translateY(-3px);filter:brightness(1.08);outline:0}.project-slot .work-normal{position:relative;z-index:1}.project-slot .work-hover{position:absolute;inset:0;z-index:2;width:100%;height:100%;object-fit:contain;opacity:0;pointer-events:none;transition:opacity .25s ease}.project-slot:hover .work-hover,.project-slot:focus-visible .work-hover{opacity:1}@media(hover:none){.project-slot .work-hover{display:none}}
+      .pdf-dialog{width:100vw;max-width:none;height:100dvh;margin:0;border:0;padding:0;background:#111;color:#f5f4ef}.pdf-dialog::backdrop{background:rgba(0,0,0,.82)}
+      .pdf-dialog-bar{height:58px;padding:0 4vw;display:flex;align-items:center;justify-content:space-between;background:#151515;font:600 .68rem "DM Mono",monospace;letter-spacing:.08em}.pdf-dialog-close{display:flex;align-items:center;gap:.55rem;border:0;background:transparent;color:#fff;font:600 .72rem "DM Mono",monospace;letter-spacing:.08em;cursor:pointer}.pdf-dialog-close-icon{display:grid;place-items:center;width:34px;height:34px;border:1px solid rgba(255,255,255,.6);border-radius:50%;font-size:1.35rem;line-height:1}.pdf-pages{height:calc(100dvh - 58px);overflow-y:auto;background:#0d0d0d;padding:0 0 24px}.pdf-pages img{display:block;width:100%;max-width:1920px;height:auto;margin:0 auto 18px;background:#fff}.pdf-pages img:last-child{margin-bottom:0}
+      .hero-visual{width:100%;min-height:100svh;padding:0;position:relative;background:url("assets/home-hero.jpg") center center/cover no-repeat}
+      .hero-visual .round-link{position:absolute;left:50%;bottom:clamp(28px,5vw,64px);transform:translateX(-50%);background:rgba(16,18,23,.84);color:#fff;border:1px solid rgba(255,255,255,.45);box-shadow:0 8px 28px rgba(0,0,0,.3)}
+      .scroll-cue{animation:scroll-cue 2.8s ease-in-out infinite}.hero-visual .round-link:hover{transform:translateX(-50%) translateY(4px);animation-play-state:paused}
+      @keyframes scroll-cue{0%,100%{translate:0 0}50%{translate:0 10px}}
+      @media(max-width:720px){.hero-visual{min-height:100svh;padding:0;background-position:center center}}
+      @media(prefers-reduced-motion:reduce){.scroll-cue,.intro-band .marquee-track{animation:none}}
+    </style>
+  </head>
+  <body>
+    <div class="noise" aria-hidden="true"></div>
+    <header class="nav wrap site-header">
+      <a class="profile-brand" href="#top" aria-label="孙肖瑞，返回顶部"><img src="assets/avatar.jpg" alt="孙肖瑞头像" /><span>孙肖瑞</span></a>
+      <nav aria-label="主导航">
+        <a href="#work">WORK</a>
+        <a href="#contact">CONTACT</a>
+      </nav>
+      <a class="resume-button" href="assets/sun-xiaorui-resume.pdf" download="孙肖瑞UI·UX简历.pdf" aria-label="下载孙肖瑞 UI/UX 简历">下载简历 <span aria-hidden="true">↓</span></a>
+    </header>
+
+    <main id="top">
+      <section class="hero hero-visual" aria-label="孙肖瑞 UI/UX 设计作品集首页">
+        <a class="round-link scroll-cue" href="#work" aria-label="向下浏览作品">↓</a>
+      </section>
+
+      <section class="intro-band" aria-label="设计理念">
+        <div class="marquee-track">
+          <span>USER INSIGHT <b>·</b> SYSTEM THINKING <b>·</b> CRAFTED INTERACTION <b>·</b></span>
+          <span aria-hidden="true">USER INSIGHT <b>·</b> SYSTEM THINKING <b>·</b> CRAFTED INTERACTION <b>·</b></span>
+        </div>
+      </section>
+
+      <section class="profile-introduction" aria-label="个人介绍">
+        <img src="assets/profile-introduction.jpg" alt="孙肖瑞个人介绍与工作经历" />
+      </section>
+
+      <section class="work wrap" id="work">
+        <div class="section-head">
+          <div><p class="eyebrow">02 — SELECTED WORK</p><h2>精选作品</h2></div>
+          <p class="section-note">旅行、即时服务与多端产品<br />的体验设计实践</p>
+        </div>
+        <img class="work-background" src="assets/contents-background.jpg" alt="目录" />
+        <div class="project-grid" aria-label="五个项目作品">
+          <div class="mosaic-column mosaic-left">
+            <article class="project project-slot slot-1" data-pdf="assets/project-1.pdf" data-title="作品 01：包车游首页体验重构" role="button" tabindex="0"><img class="work-normal" src="assets/work-1.png" alt="包车游首页体验重构，点击查看 PDF" /><img class="work-hover" src="assets/work-hover-1.png" alt="" aria-hidden="true" /></article>
+            <article class="project project-slot slot-2" data-pdf="assets/project-2.pdf" data-title="作品 02：Web／其他设计" role="button" tabindex="0"><img class="work-normal" src="assets/work-2.png" alt="Web／其他设计，点击查看 PDF" /><img class="work-hover" src="assets/work-hover-2.png" alt="" aria-hidden="true" /></article>
+          </div>
+          <div class="mosaic-column mosaic-right">
+            <article class="project project-slot slot-3" data-pdf="assets/project-3.pdf" data-title="作品 03：闪送帮买业务体验与视觉升级" role="button" tabindex="0"><img class="work-normal" src="assets/work-3.png" alt="闪送帮买业务体验与视觉升级，点击查看 PDF" /><img class="work-hover" src="assets/work-hover-3.png" alt="" aria-hidden="true" /></article>
+            <div class="mosaic-bottom">
+              <article class="project project-slot slot-4" data-pdf="assets/project-4.pdf" data-title="作品 04：AI 赋能 Hopegoo 定制游" role="button" tabindex="0"><img class="work-normal" src="assets/work-4.png" alt="AI 赋能 Hopegoo 定制游，点击查看 PDF" /><img class="work-hover" src="assets/work-hover-4.png" alt="" aria-hidden="true" /></article>
+              <article class="project project-slot slot-5" data-pdf="assets/project-5.pdf" data-title="作品 05：户外游" role="button" tabindex="0"><img class="work-normal" src="assets/work-5.png" alt="户外游，点击查看 PDF" /><img class="work-hover" src="assets/work-hover-5.png" alt="" aria-hidden="true" /></article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="closing-page" aria-label="作品集结尾页">
+        <img src="assets/closing-page.jpg" alt="孙肖瑞作品集结尾页面，含联系二维码" />
+      </section>
+
+      <section class="contact" id="contact">
+        <div class="wrap contact-inner">
+          <div class="contact-row"><a href="mailto:2469315176@qq.com">2469315176@qq.com</a><a href="tel:13460663109">134 6066 3109</a></div>
+          <p class="contact-note">作品资料与联系信息可继续补充更新</p>
+        </div>
+      </section>
+    </main>
+
+    <dialog class="project-dialog" aria-label="项目详情">
+      <div class="dialog-bar"><button class="close-dialog" aria-label="关闭项目详情">×</button><span>CASE STUDY / <b id="modalNumber">01</b></span></div>
+      <div class="dialog-content">
+        <p class="eyebrow" id="modalType"></p>
+        <h2 id="modalTitle"></h2>
+        <p class="modal-summary" id="modalSummary"></p>
+        <div class="modal-facts" id="modalFacts"></div>
+        <div class="gallery" id="modalGallery"></div>
+      </div>
+    </dialog>
+    <dialog class="pdf-dialog" aria-label="作品 PDF 查看器">
+      <div class="pdf-dialog-bar"><span id="pdfTitle">作品 PDF</span><button class="pdf-dialog-close" type="button" aria-label="关闭 PDF">关闭 <span class="pdf-dialog-close-icon" aria-hidden="true">×</span></button></div>
+      <div class="pdf-pages" id="pdfPages" aria-label="作品页面"></div>
+    </dialog>
+    <script src="app.js"></script>
+    <script>
+      (() => {
+        const dialog = document.querySelector('.pdf-dialog');
+        const pages = document.querySelector('#pdfPages');
+        const title = document.querySelector('#pdfTitle');
+        const close = document.querySelector('.pdf-dialog-close');
+        const pageCounts = { 1: 11, 2: 10, 3: 10, 4: 5, 5: 6 };
+        const open = card => {
+          const project = card.dataset.pdf.match(/project-(\d+)\.pdf/)[1];
+          const total = pageCounts[project];
+          pages.replaceChildren(...Array.from({ length: total }, (_, index) => {
+            const image = document.createElement('img');
+            image.src = `assets/pdf-pages/project-${project}/page-${String(index + 1).padStart(2, '0')}.png`;
+            image.alt = `${card.dataset.title}，第 ${index + 1} 页`;
+            image.loading = index === 0 ? 'eager' : 'lazy';
+            return image;
+          }));
+          title.textContent = card.dataset.title;
+          dialog.showModal();
+          document.body.style.overflow = 'hidden';
+        };
+        document.querySelectorAll('.project-slot[data-pdf]').forEach(card => {
+          card.addEventListener('click', () => open(card));
+          card.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); open(card); } });
+        });
+        close.addEventListener('click', () => dialog.close());
+        dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
+        dialog.addEventListener('close', () => { pages.replaceChildren(); document.body.style.overflow = ''; });
+      })();
+    </script>
+  </body>
+</html>
