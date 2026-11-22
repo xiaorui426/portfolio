@@ -29,7 +29,6 @@
       .work{background:#050505;color:#f5f4ef}
       .work .eyebrow,.work .section-note{color:#aaa9a2}
       .work .section-head h2{color:#f5f4ef}
-      .project-dialog{color:#151515}
       .project-grid{grid-template-columns:1.08fr .85fr .85fr;grid-template-rows:repeat(2,minmax(320px,1fr));gap:14px}
       .project-slot{min-height:0;border:1px dashed rgba(255,255,255,.3);border-radius:24px;background:linear-gradient(145deg,#161616,#0a0a0a);display:flex;align-items:center;justify-content:center;color:#bdbdb7;isolation:auto}
       .project-slot span{font:600 .72rem "DM Mono",monospace;letter-spacing:.08em}.project-slot::after{content:"待上传图片";position:absolute;top:22px;left:22px;font:500 .6rem "DM Mono",monospace;letter-spacing:.08em;color:#74736c}
@@ -114,21 +113,10 @@
       </section>
     </main>
 
-    <dialog class="project-dialog" aria-label="项目详情">
-      <div class="dialog-bar"><button class="close-dialog" aria-label="关闭项目详情">×</button><span>CASE STUDY / <b id="modalNumber">01</b></span></div>
-      <div class="dialog-content">
-        <p class="eyebrow" id="modalType"></p>
-        <h2 id="modalTitle"></h2>
-        <p class="modal-summary" id="modalSummary"></p>
-        <div class="modal-facts" id="modalFacts"></div>
-        <div class="gallery" id="modalGallery"></div>
-      </div>
-    </dialog>
     <dialog class="pdf-dialog" aria-label="作品 PDF 查看器">
       <div class="pdf-dialog-bar"><span id="pdfTitle">作品 PDF</span><button class="pdf-dialog-close" type="button" aria-label="关闭 PDF">关闭 <span class="pdf-dialog-close-icon" aria-hidden="true">×</span></button></div>
       <div class="pdf-pages" id="pdfPages" aria-label="作品页面"></div>
     </dialog>
-    <script src="app.js"></script>
     <script>
       (() => {
         const dialog = document.querySelector('.pdf-dialog');
@@ -140,7 +128,7 @@
         // 避免把横版页面按首张页面的比例拉伸。
         const pageHeights = {
           1: [5294, 2844, 4156, 2472, 2526, 2808, 3296, 3138, 3254, 4016, 2516],
-          2: [2160, 3072, 5074, 2418, 2700, 2160, 2420, 2420, 2160, 2246],
+          2: [2160, 3072, 5074, 2418, 2700, 2160, 2420, 2160, 2246, 2160],
           3: [2160, 2160, 2470, 2528, 2160, 3198, 2294, 2954, 3620, 5448],
           4: [2452, 2496, 7982, 2160, 2160],
           5: [2160, 2390, 2700, 2796, 2538, 3684]
@@ -154,10 +142,11 @@
         const open = card => {
           const project = card.dataset.pdf.match(/project-(\d+)\.pdf/)[1];
           const total = pageCounts[project];
+          const pageExtension = 'webp';
           if (pageObserver) pageObserver.disconnect();
           const images = Array.from({ length: total }, (_, index) => {
             const image = document.createElement('img');
-            image.dataset.src = `assets/pdf-pages/project-${project}/page-${String(index + 1).padStart(2, '0')}.png`;
+            image.dataset.src = `assets/pdf-pages/project-${project}/page-${String(index + 1).padStart(2, '0')}.${pageExtension}`;
             image.alt = `${card.dataset.title}，第 ${index + 1} 页`;
             image.width = 3840;
             image.height = pageHeights[project][index];
@@ -165,6 +154,7 @@
             return image;
           });
           pages.replaceChildren(...images);
+          pages.scrollTop = 0;
           loadPage(images[0]);
           pageObserver = new IntersectionObserver(entries => {
             entries.forEach(entry => {
@@ -177,6 +167,7 @@
           images.slice(1).forEach(image => pageObserver.observe(image));
           title.textContent = card.dataset.title;
           dialog.showModal();
+          pages.scrollTop = 0;
           document.body.style.overflow = 'hidden';
         };
         document.querySelectorAll('.project-slot[data-pdf]').forEach(card => {
