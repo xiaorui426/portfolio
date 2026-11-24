@@ -16,9 +16,7 @@
       .profile-brand img{width:34px;height:34px;border:1px solid rgba(255,255,255,.7);border-radius:50%;object-fit:cover;object-position:center 22%}
       .resume-button{display:inline-flex;align-items:center;gap:8px;padding:9px 13px;border:1px solid rgba(255,255,255,.72);border-radius:999px;color:inherit;text-decoration:none;font:600 .68rem "DM Mono",monospace;letter-spacing:.05em;transition:background .2s,color .2s}
       .resume-button:hover{background:#fff;color:#151515}
-      .intro-band .marquee-track{display:flex;width:max-content;animation:marquee-loop 24s linear infinite}
-      .intro-band .marquee-track span{flex:none;padding-right:3rem}
-      @keyframes marquee-loop{to{transform:translateX(-50%)}}
+      .intro-band{overflow:hidden}.intro-band .marquee-track{display:flex;width:max-content;will-change:transform;animation:marquee-loop 24s linear infinite}.intro-band .marquee-track span{flex:none;padding-right:3rem}@keyframes marquee-loop{to{transform:translate3d(-25%,0,0)}}
       .profile-introduction{width:100%;background:#050d14}
       .profile-introduction img{display:block;width:100%;height:auto}
       .closing-page{width:100%;background:#02080b}
@@ -42,14 +40,15 @@
       .work{position:relative;width:100%;max-width:none;margin:0;padding:0;background:transparent}
       .work .section-head{display:none}.work-background{display:block;width:100%;height:auto}.work>.project-grid{position:absolute;top:31.2%;left:4.8%;right:4.8%}
       @media(max-width:720px){.work{width:100%}.work-background{width:100%;height:auto}.work>.project-grid{position:static;margin:0 18px -6px}}
-      .project-grid,.mosaic-column,.mosaic-bottom{gap:4px}.project-slot{position:relative;padding:0;overflow:visible;cursor:pointer;transition:transform .2s ease,filter .2s ease}.project-slot:hover,.project-slot:focus-visible{transform:translateY(-3px);filter:brightness(1.08);outline:0}.project-slot .work-normal{position:relative;z-index:1}.project-slot .work-hover{position:absolute;inset:0;z-index:2;width:100%;height:100%;object-fit:contain;opacity:0;pointer-events:none;transition:opacity .25s ease}.project-slot:hover .work-hover,.project-slot:focus-visible .work-hover{opacity:1}@media(hover:none){.project-slot .work-hover{display:none}}
-      .pdf-dialog{position:fixed;inset:0;width:100vw;max-width:none;height:100dvh;max-height:none;margin:0;border:0;padding:0;background:#111;color:#f5f4ef}.pdf-dialog::backdrop{background:rgba(0,0,0,.82)}
-      .pdf-dialog-bar{height:58px;padding:0 4vw;display:flex;align-items:center;justify-content:space-between;background:#151515;font:600 .68rem "DM Mono",monospace;letter-spacing:.08em}.pdf-dialog-close{display:flex;align-items:center;gap:.55rem;border:0;background:transparent;color:#fff;font:600 .72rem "DM Mono",monospace;letter-spacing:.08em;cursor:pointer}.pdf-dialog-close-icon{display:grid;place-items:center;width:34px;height:34px;border:1px solid rgba(255,255,255,.6);border-radius:50%;font-size:1.35rem;line-height:1}.pdf-pages{height:calc(100dvh - 58px);overflow-y:auto;background:#0d0d0d;padding:0 0 24px}.pdf-pages img{display:block;width:100%;max-width:1920px;height:auto;margin:0 auto 18px;background:#fff}.pdf-pages img:last-child{margin-bottom:0}
-      .hero-visual{width:100%;min-height:100svh;padding:0;position:relative;background:url("assets/home-hero.jpg") center center/cover no-repeat}
-      .hero-visual .round-link{position:absolute;left:50%;bottom:clamp(28px,5vw,64px);transform:translateX(-50%);background:rgba(16,18,23,.84);color:#fff;border:1px solid rgba(255,255,255,.45);box-shadow:0 8px 28px rgba(0,0,0,.3)}
+      .project-grid,.mosaic-column,.mosaic-bottom{gap:4px}.project-slot{position:relative;padding:0;overflow:hidden;border-radius:clamp(22px,2.7vw,52px);cursor:pointer;isolation:isolate;transition:filter .38s ease}.project-slot:hover,.project-slot:focus-visible{filter:brightness(1.04);outline:0}.project-slot .work-normal{position:relative;z-index:1;transition:transform .75s cubic-bezier(.2,.7,.2,1)}.project-slot .work-hover{position:absolute;inset:0;z-index:2;width:100%;height:100%;object-fit:contain;opacity:0;pointer-events:none;transition:opacity .32s ease,transform .75s cubic-bezier(.2,.7,.2,1)}.project-slot:hover .work-normal,.project-slot:hover .work-hover,.project-slot:focus-visible .work-normal,.project-slot:focus-visible .work-hover{transform:scale(1.1)}.project-slot:hover .work-hover,.project-slot:focus-visible .work-hover{opacity:1}@media(hover:none){.project-slot .work-hover{display:none}}
+      @media(prefers-reduced-motion:no-preference){.scroll-reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease var(--reveal-delay,0ms),transform .65s cubic-bezier(.2,.7,.2,1) var(--reveal-delay,0ms)}.work.is-revealed .scroll-reveal{opacity:1;transform:translateY(0)}}
+      .pdf-dialog{position:fixed;inset:0;width:100vw;max-width:none;height:100dvh;max-height:none;margin:0;border:0;padding:0;background:#0b0b0c;color:#f5f4ef}.pdf-dialog::backdrop{background:rgba(0,0,0,.82)}.pdf-viewer{display:flex;width:100%;height:100%}.project-switcher{width:272px;flex:0 0 272px;display:flex;flex-direction:column;padding:28px 18px 22px;background:#111114;border-right:1px solid rgba(255,255,255,.12);font-family:"DM Mono",monospace}.viewer-home{display:flex;align-items:center;gap:9px;padding:12px 10px;border:0;background:transparent;color:#f5f4ef;text-align:left;font:600 .72rem "DM Mono",monospace;letter-spacing:.04em;cursor:pointer}.viewer-home:hover,.viewer-home:focus-visible{color:#b39cff}.switcher-label{margin:35px 10px 12px;color:#888891;font:500 .61rem "DM Mono",monospace;letter-spacing:.1em}.project-switch-list{display:grid;gap:4px}.project-switch-item{width:100%;padding:13px 10px;border:1px solid transparent;border-radius:8px;background:transparent;color:#a7a7ae;text-align:left;cursor:pointer;transition:background .2s,color .2s,border-color .2s}.project-switch-item:hover,.project-switch-item:focus-visible{background:#1b1b20;color:#fff;outline:0}.project-switch-item[aria-current="true"]{border-color:rgba(179,156,255,.65);background:rgba(179,156,255,.12);color:#fff}.project-switch-number{display:block;margin-bottom:5px;color:#b39cff;font:600 .61rem "DM Mono",monospace;letter-spacing:.08em}.project-switch-name{display:block;font:600 .76rem/1.35 "Noto Sans SC",sans-serif}.viewer-main{min-width:0;flex:1;display:flex;flex-direction:column;background:#0b0b0c}.pdf-dialog-bar{height:62px;flex:0 0 62px;padding:0 clamp(18px,3vw,48px);display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.12);background:#111114;font:600 .68rem "DM Mono",monospace;letter-spacing:.08em}.pdf-dialog-project{display:none;border:1px solid rgba(255,255,255,.35);border-radius:999px;background:transparent;color:#fff;padding:8px 11px;font:600 .63rem "DM Mono",monospace;letter-spacing:.06em;cursor:pointer}.pdf-dialog-close{display:flex;align-items:center;gap:.55rem;border:0;background:transparent;color:#fff;font:600 .72rem "DM Mono",monospace;letter-spacing:.08em;cursor:pointer}.pdf-dialog-close-icon{display:grid;place-items:center;width:34px;height:34px;border:1px solid rgba(255,255,255,.6);border-radius:50%;font-size:1.35rem;line-height:1}.pdf-pages{flex:1;min-height:0;overflow-y:auto;background:#0b0b0c;padding:0}.pdf-pages img{display:block;width:100%;max-width:1920px;height:auto;margin:0 auto 18px;background:#fff}.pdf-pages img:last-of-type{margin-bottom:0}.more-projects{max-width:1920px;margin:0 auto;padding:clamp(58px,8vw,116px) clamp(22px,5vw,84px) clamp(72px,9vw,132px);background:#0b0b0c}.more-projects-kicker{margin:0 0 12px;color:#b39cff;font:600 .66rem "DM Mono",monospace;letter-spacing:.12em}.more-projects h2{margin:0 0 32px;color:#fff;font-size:clamp(2rem,4vw,4rem);line-height:1;letter-spacing:-.06em}.more-project-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.more-project-card{position:relative;min-height:160px;overflow:hidden;border:1px solid rgba(255,255,255,.2);border-radius:12px;background:#17171a;color:#fff;text-align:left;cursor:pointer}.more-project-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.34;transition:opacity .2s,transform .3s}.more-project-card::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,rgba(0,0,0,.85),rgba(0,0,0,.22))}.more-project-card span{position:relative;z-index:1;display:block;padding:22px;font:700 clamp(.83rem,1.3vw,1.05rem)/1.35 "Noto Sans SC",sans-serif}.more-project-card small{display:block;margin-bottom:8px;color:#b39cff;font:600 .63rem "DM Mono",monospace;letter-spacing:.08em}.more-project-card:hover img,.more-project-card:focus-visible img{opacity:.55;transform:scale(1.04)}.more-project-card:focus-visible{outline:2px solid #b39cff;outline-offset:2px}
+      @media(max-width:820px){.project-switcher{position:fixed;z-index:4;top:0;bottom:0;left:0;width:min(320px,86vw);padding-top:20px;box-shadow:18px 0 45px rgba(0,0,0,.42);transform:translateX(-105%);transition:transform .25s ease}.pdf-dialog.projects-open .project-switcher{transform:translateX(0)}.pdf-dialog.projects-open .viewer-main::after{content:"";position:fixed;z-index:3;inset:0;background:rgba(0,0,0,.5)}.pdf-dialog-project{display:block}.more-project-grid{grid-template-columns:1fr}.more-project-card{min-height:126px}}
+      .hero-visual{width:100%;min-height:100svh;padding:0;position:relative;overflow:hidden;background:#050d14 url("assets/home-hero.jpg?v=2") center center/cover no-repeat}.hero-copy{position:absolute;z-index:1;top:clamp(220px,28.2vh,330px);left:clamp(48px,4.8vw,98px);pointer-events:none}.hero-title-image{display:block;width:clamp(360px,38vw,760px);height:auto}.hero-tools{display:block;width:clamp(250px,21vw,430px);height:auto;margin-top:clamp(22px,2.4vw,44px)}.hero-portfolio{position:absolute;z-index:1;left:clamp(48px,4.8vw,98px);bottom:clamp(205px,23vh,275px);margin:0;color:#fff;font:800 clamp(1.7rem,2.45vw,3.1rem)/1 "Noto Sans SC",sans-serif;letter-spacing:-.06em}.hero-credit{position:absolute;z-index:1;left:clamp(48px,4.8vw,98px);bottom:clamp(42px,5vw,82px);margin:0;color:rgba(255,255,255,.76);font:500 clamp(.68rem,1.02vw,1.28rem)/1 "DM Mono",monospace;font-style:italic;letter-spacing:-.04em}.hero-visual .round-link{position:absolute;z-index:1;left:50%;bottom:clamp(28px,5vw,64px);transform:translateX(-50%);background:rgba(16,18,23,.84);color:#fff;border:1px solid rgba(255,255,255,.45);box-shadow:0 8px 28px rgba(0,0,0,.3)}
+      @media(prefers-reduced-motion:no-preference){.site-header{animation:hero-header-enter .65s cubic-bezier(.2,.7,.2,1) .08s both}.hero-visual::before{content:"";position:absolute;z-index:0;inset:0;background:linear-gradient(105deg,rgba(4,11,18,.54),rgba(4,11,18,.08) 62%,rgba(4,11,18,.2));pointer-events:none;animation:hero-atmosphere 1.2s ease-out both}.hero-title-image{animation:hero-title-enter .8s cubic-bezier(.16,.8,.22,1) .25s both}.hero-tools{animation:hero-item-enter .55s cubic-bezier(.2,.7,.2,1) .82s both}.hero-portfolio{animation:hero-item-enter .6s cubic-bezier(.2,.7,.2,1) 1.02s both}.hero-credit{animation:hero-item-enter .5s cubic-bezier(.2,.7,.2,1) 1.17s both}.hero-visual .round-link{animation:hero-cue-enter .55s cubic-bezier(.2,.7,.2,1) 1.3s both,scroll-cue 2.8s ease-in-out 1.85s infinite}@keyframes hero-header-enter{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:translateY(0)}}@keyframes hero-atmosphere{from{opacity:1}to{opacity:0}}@keyframes hero-title-enter{from{opacity:0;transform:translateY(20px) scale(.985);clip-path:inset(0 100% 0 0)}to{opacity:1;transform:translateY(0) scale(1);clip-path:inset(0 0 0 0)}}@keyframes hero-item-enter{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}@keyframes hero-cue-enter{from{opacity:0;transform:translateX(-50%) translateY(12px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}}
       .scroll-cue{animation:scroll-cue 2.8s ease-in-out infinite}.hero-visual .round-link:hover{transform:translateX(-50%) translateY(4px);animation-play-state:paused}
       @keyframes scroll-cue{0%,100%{translate:0 0}50%{translate:0 10px}}
-      @media(max-width:720px){.hero-visual{min-height:100svh;padding:0;background-position:center center}}
+      @media(max-width:720px){.hero-visual{min-height:100svh;padding:0;background-position:center center}.hero-copy{top:25vh;left:24px}.hero-title-image{width:min(69vw,430px)}.hero-tools{width:min(72vw,310px);margin-top:20px}.hero-portfolio{left:24px;bottom:19vh;font-size:clamp(1.55rem,7.4vw,2.2rem)}.hero-credit{left:24px;bottom:30px;font-size:.66rem}.hero-visual .round-link{bottom:30px}}
       @media(prefers-reduced-motion:reduce){.scroll-cue,.intro-band .marquee-track{animation:none}}
     </style>
   </head>
@@ -66,12 +65,20 @@
 
     <main id="top">
       <section class="hero hero-visual" aria-label="孙肖瑞 UI/UX 设计作品集首页">
+        <div class="hero-copy" aria-label="2026 UI/UX 设计">
+          <img class="hero-title-image" src="assets/home-title.png" alt="2026 UI/UX设计" />
+          <img class="hero-tools" src="assets/home-tools.png" alt="MasterGo、Figma、After Effects、Photoshop 与 Illustrator" />
+        </div>
+        <p class="hero-portfolio">孙肖瑞的作品 ↘</p>
+        <p class="hero-credit">○ □ ▷ Cease 2025 ~ 2026</p>
         <a class="round-link scroll-cue" href="#work" aria-label="向下浏览作品">↓</a>
       </section>
 
       <section class="intro-band" aria-label="设计理念">
         <div class="marquee-track">
           <span>USER INSIGHT <b>·</b> SYSTEM THINKING <b>·</b> CRAFTED INTERACTION <b>·</b></span>
+          <span aria-hidden="true">USER INSIGHT <b>·</b> SYSTEM THINKING <b>·</b> CRAFTED INTERACTION <b>·</b></span>
+          <span aria-hidden="true">USER INSIGHT <b>·</b> SYSTEM THINKING <b>·</b> CRAFTED INTERACTION <b>·</b></span>
           <span aria-hidden="true">USER INSIGHT <b>·</b> SYSTEM THINKING <b>·</b> CRAFTED INTERACTION <b>·</b></span>
         </div>
       </section>
@@ -88,14 +95,14 @@
         <img class="work-background" src="assets/contents-background.jpg" alt="目录" loading="lazy" decoding="async" />
         <div class="project-grid" aria-label="五个项目作品">
           <div class="mosaic-column mosaic-left">
-            <article class="project project-slot slot-1" data-pdf="assets/project-1.pdf" data-title="作品 01：包车游首页体验重构" role="button" tabindex="0"><img class="work-normal" src="assets/work-1.png" alt="包车游首页体验重构，点击查看 PDF" loading="lazy" decoding="async" /><img class="work-hover" src="assets/work-hover-1.png" alt="" aria-hidden="true" loading="lazy" decoding="async" /></article>
-            <article class="project project-slot slot-2" data-pdf="assets/project-2.pdf" data-title="作品 02：Web／其他设计" role="button" tabindex="0"><img class="work-normal" src="assets/work-2.png" alt="Web／其他设计，点击查看 PDF" loading="lazy" decoding="async" /><img class="work-hover" src="assets/work-hover-2.png" alt="" aria-hidden="true" loading="lazy" decoding="async" /></article>
+            <article class="project project-slot slot-1" data-source="1" data-title="作品 01：包车游首页体验重构" role="button" tabindex="0"><img class="work-normal" src="assets/work-1.png" alt="包车游首页体验重构，点击查看作品" loading="lazy" decoding="async" /><img class="work-hover" src="assets/work-hover-1.png" alt="" aria-hidden="true" loading="lazy" decoding="async" /></article>
+            <article class="project project-slot slot-2" data-source="2" data-title="作品 02：Web／其他设计" role="button" tabindex="0"><img class="work-normal" src="assets/work-2.png" alt="Web／其他设计，点击查看作品" loading="lazy" decoding="async" /><img class="work-hover" src="assets/work-hover-2.png" alt="" aria-hidden="true" loading="lazy" decoding="async" /></article>
           </div>
           <div class="mosaic-column mosaic-right">
-            <article class="project project-slot slot-3" data-pdf="assets/project-3.pdf" data-title="作品 03：闪送帮买业务体验与视觉升级" role="button" tabindex="0"><img class="work-normal" src="assets/work-3.png" alt="闪送帮买业务体验与视觉升级，点击查看 PDF" loading="lazy" decoding="async" /><img class="work-hover" src="assets/work-hover-3.png" alt="" aria-hidden="true" loading="lazy" decoding="async" /></article>
+            <article class="project project-slot slot-3" data-source="3" data-title="作品 03：闪送帮买业务体验与视觉升级" role="button" tabindex="0"><img class="work-normal" src="assets/work-3.png" alt="闪送帮买业务体验与视觉升级，点击查看作品" loading="lazy" decoding="async" /><img class="work-hover" src="assets/work-hover-3.png" alt="" aria-hidden="true" loading="lazy" decoding="async" /></article>
             <div class="mosaic-bottom">
-              <article class="project project-slot slot-4" data-pdf="assets/project-4.pdf" data-title="作品 04：AI 赋能 Hopegoo 定制游" role="button" tabindex="0"><img class="work-normal" src="assets/work-4.png" alt="AI 赋能 Hopegoo 定制游，点击查看 PDF" loading="lazy" decoding="async" /><img class="work-hover" src="assets/work-hover-4.png" alt="" aria-hidden="true" loading="lazy" decoding="async" /></article>
-              <article class="project project-slot slot-5" data-pdf="assets/project-5.pdf" data-title="作品 05：户外游" role="button" tabindex="0"><img class="work-normal" src="assets/work-5.png" alt="户外游，点击查看 PDF" loading="lazy" decoding="async" /><img class="work-hover" src="assets/work-hover-5.png" alt="" aria-hidden="true" loading="lazy" decoding="async" /></article>
+              <article class="project project-slot slot-4" data-source="4" data-title="作品 04：AI 赋能 Hopegoo 定制游" role="button" tabindex="0"><img class="work-normal" src="assets/work-4.png" alt="AI 赋能 Hopegoo 定制游，点击查看作品" loading="lazy" decoding="async" /><img class="work-hover" src="assets/work-hover-4.png" alt="" aria-hidden="true" loading="lazy" decoding="async" /></article>
+              <article class="project project-slot slot-5" data-source="5" data-title="作品 05：户外游" role="button" tabindex="0"><img class="work-normal" src="assets/work-5.png" alt="户外游，点击查看作品" loading="lazy" decoding="async" /><img class="work-hover" src="assets/work-hover-5.png" alt="" aria-hidden="true" loading="lazy" decoding="async" /></article>
             </div>
           </div>
         </div>
@@ -108,14 +115,22 @@
       <section class="contact" id="contact">
         <div class="wrap contact-inner">
           <div class="contact-row"><a href="mailto:2469315176@qq.com">2469315176@qq.com</a><a href="tel:13460663109">134 6066 3109</a></div>
-          <p class="contact-note">作品资料与联系信息可继续补充更新</p>
         </div>
       </section>
     </main>
 
-    <dialog class="pdf-dialog" aria-label="作品 PDF 查看器">
-      <div class="pdf-dialog-bar"><span id="pdfTitle">作品 PDF</span><button class="pdf-dialog-close" type="button" aria-label="关闭 PDF">关闭 <span class="pdf-dialog-close-icon" aria-hidden="true">×</span></button></div>
-      <div class="pdf-pages" id="pdfPages" aria-label="作品页面"></div>
+    <dialog class="pdf-dialog" aria-label="作品查看器">
+      <div class="pdf-viewer">
+        <aside class="project-switcher" aria-label="项目切换">
+          <button class="viewer-home" type="button">← 返回作品目录</button>
+          <p class="switcher-label">PROJECTS · 05</p>
+          <div class="project-switch-list" id="projectSwitchList"></div>
+        </aside>
+        <div class="viewer-main">
+          <div class="pdf-dialog-bar"><button class="pdf-dialog-project" type="button" aria-expanded="false" aria-controls="projectSwitchList">项目列表</button><span id="pdfTitle">作品 PDF</span><button class="pdf-dialog-close" type="button" aria-label="关闭作品查看器">关闭 <span class="pdf-dialog-close-icon" aria-hidden="true">×</span></button></div>
+          <div class="pdf-pages" id="pdfPages" aria-label="作品页面"></div>
+        </div>
+      </div>
     </dialog>
     <script>
       (() => {
@@ -123,6 +138,9 @@
         const pages = document.querySelector('#pdfPages');
         const title = document.querySelector('#pdfTitle');
         const close = document.querySelector('.pdf-dialog-close');
+        const home = document.querySelector('.viewer-home');
+        const projectToggle = document.querySelector('.pdf-dialog-project');
+        const switchList = document.querySelector('#projectSwitchList');
         const pageCounts = { 1: 11, 2: 9, 3: 10, 4: 5, 5: 6 };
         // 每份 PDF 的页面高度并不一致。使用每页的真实尺寸预留空间，
         // 避免把横版页面按首张页面的比例拉伸。
@@ -134,26 +152,88 @@
           5: [2160, 2390, 2700, 2796, 2538, 3684]
         };
         let pageObserver;
+        let activeProject = null;
+        const cards = [...document.querySelectorAll('.project-slot[data-source]')];
+        const projectOrder = [1, 4, 3, 5, 2];
+        const projects = projectOrder.map((sourceId, index) => {
+          const card = cards.find(item => Number(item.dataset.source) === sourceId);
+          return {
+            id: index + 1,
+            sourceId,
+            title: card.dataset.title.replace(/^作品 \d+：/, ''),
+            card,
+            image: card.querySelector('.work-normal').src
+          };
+        });
+        const work = document.querySelector('.work');
+        const revealTargets = [work.querySelector('.work-background'), ...cards];
+        revealTargets.forEach((target, index) => {
+          target.classList.add('scroll-reveal');
+          target.style.setProperty('--reveal-delay', `${index * 110}ms`);
+        });
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+          work.classList.add('is-revealed');
+        } else {
+          const workObserver = new IntersectionObserver(entries => {
+            if (!entries[0].isIntersecting) return;
+            work.classList.add('is-revealed');
+            workObserver.disconnect();
+          }, { rootMargin: '0px 0px 18% 0px', threshold: .01 });
+          workObserver.observe(work);
+        }
         const loadPage = image => {
           if (!image.dataset.src) return;
           image.src = image.dataset.src;
           image.removeAttribute('data-src');
         };
-        const open = card => {
-          const project = card.dataset.pdf.match(/project-(\d+)\.pdf/)[1];
-          const total = pageCounts[project];
+        const setProjectMenuState = project => {
+          switchList.querySelectorAll('button').forEach(button => {
+            button.setAttribute('aria-current', String(button.dataset.project) === String(project));
+          });
+        };
+        const setHash = project => {
+          history.replaceState(null, '', `#project-${project}`);
+        };
+        const closeProjectMenu = () => {
+          dialog.classList.remove('projects-open');
+          projectToggle.setAttribute('aria-expanded', 'false');
+        };
+        const createMoreProjects = project => {
+          const section = document.createElement('section');
+          section.className = 'more-projects';
+          section.setAttribute('aria-label', '切换到其他作品');
+          const remainingProjects = projects.filter(item => item.id !== Number(project));
+          section.innerHTML = '<p class="more-projects-kicker">MORE PROJECTS</p><h2>继续浏览其他作品</h2><div class="more-project-grid"></div>';
+          const grid = section.querySelector('.more-project-grid');
+          remainingProjects.forEach(item => {
+            const button = document.createElement('button');
+            button.className = 'more-project-card';
+            button.type = 'button';
+            button.innerHTML = `<img src="${item.image}" alt="" loading="lazy" decoding="async"><span><small>0${item.id}</small>${item.title}</span>`;
+            button.addEventListener('click', () => openProject(item.id));
+            grid.append(button);
+          });
+          return section;
+        };
+        const openProject = project => {
+          const item = projects.find(entry => entry.id === Number(project));
+          if (!item) return;
+          const card = item.card;
+          const sourceProject = item.sourceId;
+          const total = pageCounts[sourceProject];
           const pageExtension = 'webp';
+          const viewerTitle = `作品 ${String(item.id).padStart(2, '0')}：${item.title}`;
           if (pageObserver) pageObserver.disconnect();
           const images = Array.from({ length: total }, (_, index) => {
             const image = document.createElement('img');
-            image.dataset.src = `assets/pdf-pages/project-${project}/page-${String(index + 1).padStart(2, '0')}.${pageExtension}`;
-            image.alt = `${card.dataset.title}，第 ${index + 1} 页`;
+            image.dataset.src = `assets/pdf-pages/project-${sourceProject}/page-${String(index + 1).padStart(2, '0')}.${pageExtension}`;
+            image.alt = `${viewerTitle}，第 ${index + 1} 页`;
             image.width = 3840;
-            image.height = pageHeights[project][index];
+            image.height = pageHeights[sourceProject][index];
             image.decoding = 'async';
             return image;
           });
-          pages.replaceChildren(...images);
+          pages.replaceChildren(...images, createMoreProjects(project));
           pages.scrollTop = 0;
           loadPage(images[0]);
           pageObserver = new IntersectionObserver(entries => {
@@ -165,18 +245,47 @@
             });
           }, { root: pages, rootMargin: '1200px 0px' });
           images.slice(1).forEach(image => pageObserver.observe(image));
-          title.textContent = card.dataset.title;
-          dialog.showModal();
+          title.textContent = viewerTitle;
+          activeProject = Number(project);
+          setProjectMenuState(project);
+          closeProjectMenu();
+          if (!dialog.open) dialog.showModal();
           pages.scrollTop = 0;
           document.body.style.overflow = 'hidden';
+          setHash(project);
         };
-        document.querySelectorAll('.project-slot[data-pdf]').forEach(card => {
-          card.addEventListener('click', () => open(card));
-          card.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); open(card); } });
+        projects.forEach(item => {
+          const button = document.createElement('button');
+          button.className = 'project-switch-item';
+          button.type = 'button';
+          button.dataset.project = item.id;
+          button.innerHTML = `<span class="project-switch-number">0${item.id}</span><span class="project-switch-name">${item.title}</span>`;
+          button.addEventListener('click', () => openProject(item.id));
+          switchList.append(button);
+          item.card.addEventListener('click', () => openProject(item.id));
+          item.card.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openProject(item.id); } });
         });
         close.addEventListener('click', () => dialog.close());
+        home.addEventListener('click', () => dialog.close());
+        projectToggle.addEventListener('click', () => {
+          const isOpen = dialog.classList.toggle('projects-open');
+          projectToggle.setAttribute('aria-expanded', String(isOpen));
+        });
         dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
-        dialog.addEventListener('close', () => { if (pageObserver) pageObserver.disconnect(); pages.replaceChildren(); document.body.style.overflow = ''; });
+        dialog.addEventListener('close', () => {
+          if (pageObserver) pageObserver.disconnect();
+          pages.replaceChildren();
+          document.body.style.overflow = '';
+          closeProjectMenu();
+          activeProject = null;
+          if (location.hash.startsWith('#project-')) history.replaceState(null, '', location.pathname + location.search);
+        });
+        window.addEventListener('hashchange', () => {
+          const match = location.hash.match(/^#project-([1-5])$/);
+          if (match) openProject(Number(match[1]));
+        });
+        const initialProject = location.hash.match(/^#project-([1-5])$/);
+        if (initialProject) openProject(Number(initialProject[1]));
       })();
     </script>
   </body>
